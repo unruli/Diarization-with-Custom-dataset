@@ -111,19 +111,6 @@ Where:
 
 ---
 
-### 🧮 Example
-
-If:
-- \( T_{\text{ref}} = 100 \, \text{seconds} \)
-- \( T_{\text{miss}} = 5 \, \text{seconds} \)
-- \( T_{\text{fa}} = 3 \, \text{seconds} \)
-- \( T_{\text{err}} = 7 \, \text{seconds} \)
-
-Then:
-
-\[
-\text{DER} = \frac{5 + 3 + 7}{100} = \frac{15}{100} = 15\%
-\]
 
 ---
 
