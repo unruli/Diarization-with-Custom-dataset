@@ -24,6 +24,16 @@ Speech diarization typically consists of several stages, each grounded in mathem
 This is often modeled as a binary classification problem:
 
 
+Neural networks trained on acoustic features like MFCCs or log-mel spectrograms are commonly used.
+
+---
+
+### 2. Speaker Embedding Extraction
+
+Each speech segment is converted into a **vector representation** (embedding) that captures speaker characteristics.
+
+
+
 y_i = 
 \begin{cases}
 1, & \text{if frame } i \text{ contains speech} \\
