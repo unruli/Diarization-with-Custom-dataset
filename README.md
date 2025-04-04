@@ -5,6 +5,32 @@ This purpose of this project is to show the performance of some open and closed 
 
 This project focuses on **speech diarization**—the task of determining "who spoke when"—using a custom dataset. We explore multiple diarization models, both open-source and closed-source, and evaluate their performance using standard diarization metrics.
 
+# 🧠 Understanding Diarization and Diarization Error Rate (DER)
+
+## 🗣️ What is Speech Diarization?
+
+**Speech diarization** is the process of segmenting an audio stream to determine "**who spoke when**." It is essential in applications like meeting transcription, conversational analysis, and speaker indexing, especially when multiple speakers are involved.
+
+---
+
+## 📐 Foundational Concepts and Mathematics Behind Diarization
+
+Speech diarization typically consists of several stages, each grounded in mathematical principles:
+
+### 1. Voice Activity Detection (VAD)
+
+**Goal:** Identify time segments that contain speech.
+
+This is often modeled as a binary classification problem:
+
+```math
+y_i = 
+\begin{cases}
+1, & \text{if frame } i \text{ contains speech} \\
+0, & \text{otherwise}
+\end{cases}
+
+
 ---
 
 ## 📁 Project Structure
