@@ -97,19 +97,11 @@ DER accounts for:
 - **False alarm (FA)**: Non-speech or incorrect segments falsely marked as speech.
 - **Speaker error (Confusion)**: Speech attributed to the wrong speaker.
 
-The formula is:
 
-\[
-\text{DER} = \frac{T_{\text{miss}} + T_{\text{fa}} + T_{\text{err}}}{T_{\text{ref}}}
-\]
-
-Where:
-- \( T_{\text{miss}} \): Duration of missed speech
-- \( T_{\text{fa}} \): Duration of false alarm speech
-- \( T_{\text{err}} \): Duration of speaker confusion
-- \( T_{\text{ref}} \): Total duration of reference speaker segments
 
 ![Alt text](gallery/dia-formula.png) 
+
+DER = (T_miss + T_fa + T_err) / T_ref
 
 ---
 
