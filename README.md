@@ -26,13 +26,13 @@ Diarization typically involves the following main stages:
 
 This is treated as a binary classification task for each audio frame \( i \):
 
-\[
-y_i =
-\begin{cases}
-1, & \text{if frame } i \text{ contains speech} \\
-0, & \text{otherwise}
-\end{cases}
-\]
+**Speech detection decision rule:**
+
+| Frame \(i\) contains speech? | Output \(y_i\) |
+|-----------------------------|----------------|
+| Yes                         | 1              |
+| No                          | 0              |
+
 
 Machine learning models (e.g., neural networks, SVMs) are trained on acoustic features like MFCCs, log-Mel spectrograms, or waveform-based representations.
 
