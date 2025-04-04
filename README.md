@@ -23,12 +23,32 @@ Speech diarization typically consists of several stages, each grounded in mathem
 
 This is often modeled as a binary classification problem:
 
-```math
+
 y_i = 
 \begin{cases}
 1, & \text{if frame } i \text{ contains speech} \\
 0, & \text{otherwise}
 \end{cases}
+
+
+
+Where:
+- `T_ref` = Total reference speaker time
+- `T_miss` = Time missed (not detected)
+- `T_fa` = Time falsely detected as speech
+- `T_err` = Time attributed to the wrong speaker
+
+---
+
+### Example
+
+If:
+- `T_ref = 100` seconds  
+- `T_miss = 5` seconds  
+- `T_fa = 3` seconds  
+- `T_err = 7` seconds  
+
+Then:
 
 
 ---
