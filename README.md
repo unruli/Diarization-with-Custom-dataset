@@ -43,9 +43,10 @@ Machine learning models (e.g., neural networks, SVMs) are trained on acoustic fe
 Once speech segments are identified, embeddings are generated to represent each speaker’s voice in a lower-dimensional space.
 
 Let:
-- \( \mathbf{x}_i \) be the audio features from a segment \( i \)
-- \( f \) be the embedding model (e.g., d-vector, x-vector)
-- \( \mathbf{e}_i \) be the resulting embedding
+- `x_i`: the audio features from a segment `i`
+- `f`: the embedding model (e.g., d-vector, x-vector)
+- `e_i`: the resulting embedding
+
 
 \[
 \mathbf{e}_i = f(\mathbf{x}_i)
