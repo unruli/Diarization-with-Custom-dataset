@@ -109,7 +109,7 @@ Where:
 - \( T_{\text{err}} \): Duration of speaker confusion
 - \( T_{\text{ref}} \): Total duration of reference speaker segments
 
-![Alt text](gallery/dia formula.png)
+![Alt text](gallery/dia-formula.png)
 
 ---
 
