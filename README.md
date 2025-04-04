@@ -47,6 +47,8 @@ Let:
 - `f`: the embedding model (e.g., d-vector, x-vector)
 - `e_i`: the resulting embedding
 
+![embedding equation](https://latex.codecogs.com/png.image?\dpi{110}&space;\mathbf{e}_i&space;=&space;f(\mathbf{x}_i))
+
 
 \[
 \mathbf{e}_i = f(\mathbf{x}_i)
