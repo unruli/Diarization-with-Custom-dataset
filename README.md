@@ -103,6 +103,16 @@ DER accounts for:
 
 DER = (T_miss + T_fa + T_err) / T_ref
 
+DER = (T_miss + T_fa + T_err) / T_ref
+
+Where:
+
+T_miss : Duration of missed speech  
+T_fa   : Duration of false alarm speech  
+T_err  : Duration of speaker confusion  
+T_ref  : Total duration of reference speaker segments
+
+
 ---
 
 ### ⚠️ Notes on DER
