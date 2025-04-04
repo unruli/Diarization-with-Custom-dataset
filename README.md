@@ -1,88 +1,132 @@
 # Diarization-with-Custom-dataset
 This purpose of this project is to show the performance of some open and closed state of the art models on Diarization task.
 
-# 🗣️ Speech Diarization on Custom Dataset
-
-This project focuses on **speech diarization**—the task of determining "who spoke when"—using a custom dataset. We explore multiple diarization models, both open-source and closed-source, and evaluate their performance using standard diarization metrics.
-
-# 🧠 Understanding Diarization and Diarization Error Rate (DER)
+# 🧠 Understanding Speech Diarization and Diarization Error Rate (DER)
 
 ## 🗣️ What is Speech Diarization?
 
-**Speech diarization** is the process of segmenting an audio stream to determine "**who spoke when**." It is essential in applications like meeting transcription, conversational analysis, and speaker indexing, especially when multiple speakers are involved.
+**Speech diarization** is the process of segmenting an audio stream into homogeneous sections according to speaker identity — in other words, it answers the question: **“Who spoke when?”**
+
+Diarization is an essential component in multi-speaker audio processing tasks like:
+- Meeting and interview transcription
+- Conversation analysis
+- Speaker indexing and retrieval
 
 ---
 
-## 📐 Foundational Concepts and Mathematics Behind Diarization
+## 📐 Key Components and Mathematics of Diarization
 
-Speech diarization typically consists of several stages, each grounded in mathematical principles:
+Diarization typically involves the following main stages:
+
+---
 
 ### 1. Voice Activity Detection (VAD)
 
-**Goal:** Identify time segments that contain speech.
+**Goal:** Detect regions in the audio that contain speech.
 
-This is often modeled as a binary classification problem:
+This is treated as a binary classification task for each audio frame \( i \):
 
+\[
+y_i =
+\begin{cases}
+1, & \text{if frame } i \text{ contains speech} \\
+0, & \text{otherwise}
+\end{cases}
+\]
 
-Neural networks trained on acoustic features like MFCCs or log-mel spectrograms are commonly used.
+Machine learning models (e.g., neural networks, SVMs) are trained on acoustic features like MFCCs, log-Mel spectrograms, or waveform-based representations.
 
 ---
 
 ### 2. Speaker Embedding Extraction
 
-Each speech segment is converted into a **vector representation** (embedding) that captures speaker characteristics.
+Once speech segments are identified, embeddings are generated to represent each speaker’s voice in a lower-dimensional space.
 
+Let:
+- \( \mathbf{x}_i \) be the audio features from a segment \( i \)
+- \( f \) be the embedding model (e.g., d-vector, x-vector)
+- \( \mathbf{e}_i \) be the resulting embedding
 
+\[
+\mathbf{e}_i = f(\mathbf{x}_i)
+\]
 
-y_i = 
-\begin{cases}
-1, & \text{if frame } i \text{ contains speech} \\
-0, & \text{otherwise}
-\end{cases}
-
-
-
-Where:
-- `T_ref` = Total reference speaker time
-- `T_miss` = Time missed (not detected)
-- `T_fa` = Time falsely detected as speech
-- `T_err` = Time attributed to the wrong speaker
+These embeddings are vectors in a high-dimensional space that encode speaker-specific characteristics.
 
 ---
 
-### Example
+### 3. Clustering (Speaker Attribution)
+
+The extracted embeddings are clustered into speaker groups using unsupervised learning.
+
+One common similarity metric is cosine similarity:
+
+\[
+\text{sim}(\mathbf{e}_i, \mathbf{e}_j) = \frac{\mathbf{e}_i \cdot \mathbf{e}_j}{\|\mathbf{e}_i\| \|\mathbf{e}_j\|}
+\]
+
+Clustering methods include:
+- **Agglomerative Hierarchical Clustering (AHC)**
+- **Spectral Clustering**
+- **K-Means**
+
+Each cluster corresponds to one hypothesized speaker.
+
+---
+
+### 4. Re-segmentation (Optional)
+
+This stage refines speaker boundaries using probabilistic models such as:
+- Hidden Markov Models (HMM)
+- Viterbi decoding
+
+The goal is to minimize segmentation errors and improve speaker consistency over time.
+
+---
+
+## 📊 Diarization Error Rate (DER)
+
+**Diarization Error Rate (DER)** is the standard metric for evaluating the performance of diarization systems. It measures the **percentage of total speaker time** that is incorrectly attributed.
+
+DER accounts for:
+- **Missed speech (Miss)**: Speech in reference not detected by the system.
+- **False alarm (FA)**: Non-speech or incorrect segments falsely marked as speech.
+- **Speaker error (Confusion)**: Speech attributed to the wrong speaker.
+
+The formula is:
+
+\[
+\text{DER} = \frac{T_{\text{miss}} + T_{\text{fa}} + T_{\text{err}}}{T_{\text{ref}}}
+\]
+
+Where:
+- \( T_{\text{miss}} \): Duration of missed speech
+- \( T_{\text{fa}} \): Duration of false alarm speech
+- \( T_{\text{err}} \): Duration of speaker confusion
+- \( T_{\text{ref}} \): Total duration of reference speaker segments
+
+---
+
+### 🧮 Example
 
 If:
-- `T_ref = 100` seconds  
-- `T_miss = 5` seconds  
-- `T_fa = 3` seconds  
-- `T_err = 7` seconds  
+- \( T_{\text{ref}} = 100 \, \text{seconds} \)
+- \( T_{\text{miss}} = 5 \, \text{seconds} \)
+- \( T_{\text{fa}} = 3 \, \text{seconds} \)
+- \( T_{\text{err}} = 7 \, \text{seconds} \)
 
 Then:
 
+\[
+\text{DER} = \frac{5 + 3 + 7}{100} = \frac{15}{100} = 15\%
+\]
 
 ---
 
-## 📁 Project Structure
+### ⚠️ Notes on DER
 
-```bash
-.
-├── README.markdown
-├── data/
-│   ├── raw/                # Raw custom audio files (WAV, MP3, etc.)
-│   ├── annotations/        # Reference speaker segments in RTTM or CSV
-├── notebooks/
-│   ├── preprocess_data.ipynb
-│   ├── run_diarization.ipynb
-│   ├── evaluate_models.ipynb
-├── models/
-│   ├── pyannote/
-│   ├── resemblyzer/
-│   ├── whisperx/
-│   ├── closed_model_X/     # Placeholder for commercial models (e.g., AssemblyAI, Rev.ai)
-├── scripts/
-│   ├── diarize.py          # Script for running diarization model
-│   ├── evaluate.py         # Calculate DER and other metrics
-├── results/
-│   ├── diarization_outputs/
-│   ├── evaluation_reports/
+- A **collar tolerance** (e.g., ±250ms) is usually applied to ignore boundary errors near speaker transitions.
+- DER assumes alignment between predicted and reference speaker labels (via greedy matching or optimal mapping).
+- Lower DER indicates better diarization performance.
+
+---
