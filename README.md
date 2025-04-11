@@ -115,10 +115,5 @@ T_ref  : Total duration of reference speaker segments
 
 ---
 
-### ⚠️ Notes on DER
-
-- A **collar tolerance** (e.g., ±250ms) is usually applied to ignore boundary errors near speaker transitions.
-- DER assumes alignment between predicted and reference speaker labels (via greedy matching or optimal mapping).
-- Lower DER indicates better diarization performance.
 
 ---
