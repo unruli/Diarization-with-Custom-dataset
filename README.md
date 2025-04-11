@@ -1,4 +1,3 @@
-# Diarization-with-Custom-datasets
 
 
 # 🧠 Understanding Speech Diarization and Diarization Error Rate (DER)
