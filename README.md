@@ -10,8 +10,7 @@ Diarization is an essential component in multi-speaker audio processing tasks li
 - Meeting and interview transcription
 - Conversation analysis
 - Speaker indexing and retrieval
-
-![Alt text](gallery/dia.png)  ![Alt text](gallery/dia1.png)
+ ![Alt text](gallery/dia1.png)
 ---
 
 ## 📐 Key Components and Mathematics of Diarization
