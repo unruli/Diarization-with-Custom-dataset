@@ -1,5 +1,5 @@
 # Diarization-with-Custom-datasets
-This purpose of this project is to show the performance of some open and closed state of the art models on Diarization task.
+
 
 # 🧠 Understanding Speech Diarization and Diarization Error Rate (DER)
 
